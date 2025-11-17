@@ -196,9 +196,8 @@
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
 
-    // Mark as mounted and do initial render
+    // Mark as mounted (this will trigger $effect to render)
     mounted = true;
-    renderMermaid(code);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
