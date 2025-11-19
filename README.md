@@ -1,6 +1,6 @@
 # Mermaider
 
-A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. Written in Svelte bc I am learning Svelte.
+A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. Written in Svelte bc I am learning Svelte. Inspired by https://github.com/gkoos/mermaid-editor.
 
 ## TODO
 - [x] Wire up export PNG button properly
@@ -8,6 +8,7 @@ A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. 
 - [ ] Facilitate user-specified scale and/or filename for export
 - [ ] Touch support for mobile
 - [ ] Maybe make a custom logo for it lol, using shell emoji for favicon rn
+- [ ] Dynamically import mermaid lib to improve load times
 
 ## Technical considerations (from `create-vite`)
 
