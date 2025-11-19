@@ -1,6 +1,7 @@
 <script lang="ts">
   import mermaid from 'mermaid';
   import { onMount } from 'svelte';
+  import { exportPNG } from './utils/exportPNG';
 
   // State
   let code = $state(`graph TD;
@@ -172,6 +173,16 @@
     applyTransform();
   }
 
+  // Handle PNG export
+  function handleExportPNG() {
+    const svgEl = previewDiv?.querySelector('svg');
+    if (svgEl) {
+      exportPNG(svgEl, 'diagram.png');
+    } else {
+      console.error('No SVG found to export');
+    }
+  }
+
   // Watch code changes (only after mount)
   let mounted = $state(false);
   $effect(() => {
@@ -199,7 +210,7 @@
 </script>
 
 <div class="font-sans h-screen overflow-hidden flex flex-col p-6">
-  <h1 class="text-xl font-bold mb-4 text-center shrink-0">Mermaid Editor</h1>
+  <h1 class="text-xl font-bold mb-4 text-center shrink-0">Mermaider</h1>
 
   <div class="flex flex-col md:flex-row w-full max-w-6xl mx-auto gap-4 flex-1 min-h-0">
     <div class="flex flex-row gap-4 w-full h-full min-h-0">
@@ -212,7 +223,7 @@
         <div class="flex flex-row w-full flex-1 min-h-0">
           <div
             bind:this={lineNumbersDiv}
-            class="text-right pr-2 pt-4 select-none text-gray-400 bg-gray-50 border-l border-t border-b rounded-l-lg shrink-0"
+            class="text-right pr-2 pt-4 select-none text-gray-400 bg-gray-50 border-l border-t border-b border-gray-300 shrink-0"
             style="min-width:2.5em;"
           >
             {#each lineNumbers() as lineNum}
@@ -225,7 +236,7 @@
             bind:this={editorTextarea}
             bind:value={code}
             onkeydown={handleKeyDown}
-            class="flex-1 h-full font-mono border rounded-r-lg p-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-0"
+            class="flex-1 h-full font-mono border border-gray-300 p-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 min-h-0"
           ></textarea>
         </div>
 
@@ -240,18 +251,18 @@
       <div class="flex flex-col flex-1 h-full min-h-0">
         <div class="flex flex-row items-center mb-2 justify-between shrink-0" style="height:48px;">
           <span class="font-semibold">Diagram Preview</span>
-          <button
-            type="button"
-            class="text-xs text-gray-500 ml-2 cursor-pointer hover:text-gray-700 bg-transparent border-0 p-0"
-            onclick={resetZoom}
-          >
-            {zoomRatioText}
-          </button>
-          <div class="flex gap-2">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded">
-              Export SVG
+          <div class="flex gap-8">
+            <button
+              type="button"
+              class="text-xs text-gray-500 ml-2 cursor-pointer hover:text-gray-700 bg-transparent border-0 p-0"
+              onclick={resetZoom}
+            >
+              {zoomRatioText}
             </button>
-            <button class="bg-green-500 text-white px-4 py-2 rounded">
+            <button
+              onclick={handleExportPNG}
+              class="bg-black text-white px-4 py-2 hover:cursor-pointer hover:bg-black/90"
+            >
               Export PNG
             </button>
           </div>
@@ -264,7 +275,7 @@
           onmousedown={handleMouseDown}
           role="application"
           aria-label="Mermaid diagram preview with zoom and pan"
-          class="border rounded-lg bg-white dark:bg-gray-900 flex-1 w-full overflow-hidden flex items-center justify-center min-h-0 cursor-grab"
+          class="border border-gray-300 bg-white flex-1 w-full overflow-hidden flex items-center justify-center min-h-0 cursor-grab"
           class:cursor-grabbing={isDragging}
         ></div>
       </div>
@@ -272,30 +283,28 @@
   </div>
 
   <!-- Footer -->
-  <footer class="mt-4 pt-4 border-t text-center text-gray-600 text-sm shrink-0">
-    <div class="flex items-center justify-center gap-4 flex-wrap">
+  <footer class="mt-4 pt-4 text-gray-600 text-sm shrink-0">
+    <div class="flex items-center justify-between gap-4 flex-wrap">
       <a
-        href="https://github.com/gkoos/mermaid-editor"
+        href="https://github.com/nathanclairmonte/mermaider"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-blue-600 hover:text-blue-800 underline"
+        class="text-black hover:text-orange-600 hover:underline"
       >
-        View on GitHub
+        View source code on GitHub
       </a>
-      <span class="text-gray-400">•</span>
       <a
-        href="https://www.buymeacoffee.com/gkoos"
+        href="https://buymeacoffee.com/nathanclairmonte"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-yellow-600 hover:text-yellow-700 underline flex items-center gap-1"
+        class="text-black hover:text-orange-600 hover:underline flex items-center gap-1"
       >
-        <span>☕</span>
-        <span>Buy me a coffee</span>
+        <span>Buy me a coffee (:</span>
       </a>
     </div>
   </footer>
 </div>
 
-<!-- TODO: Export SVG functionality -->
-<!-- TODO: Export PNG functionality -->
+<!-- TODO: Facilitate user-specified scale and/or filename for export -->
 <!-- TODO: Touch support for mobile -->
+

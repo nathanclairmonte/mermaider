@@ -3,8 +3,9 @@
 A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. Written in Svelte bc I am learning Svelte.
 
 ## TODO
-- [ ] Wire up export buttons properly
+- [x] Wire up export PNG button properly
 - [ ] Syntax highlighting for mermaid code
+- [ ] Facilitate user-specified scale and/or filename for export
 - [ ] Touch support for mobile
 
 ## Technical considerations (from `create-vite`)
