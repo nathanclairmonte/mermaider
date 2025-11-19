@@ -241,7 +241,7 @@
         </div>
 
         <div
-          class="mt-2 min-h-16 max-h-40 overflow-auto wrap-break-word text-red-500 text-sm shrink-0"
+          class="max-h-40 overflow-auto wrap-break-word text-red-500 text-sm shrink-0"
         >
           {errorMessage}
         </div>
@@ -263,7 +263,7 @@
               onclick={handleExportPNG}
               class="bg-black text-white px-4 py-2 hover:cursor-pointer hover:bg-black/90"
             >
-              Export PNG
+              Export as PNG
             </button>
           </div>
         </div>
