@@ -2,6 +2,11 @@
 
 A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. Written in Svelte bc I am learning Svelte.
 
+## TODO
+- [ ] Wire up export buttons properly
+- [ ] Syntax highlighting for mermaid code
+- [ ] Touch support for mobile
+
 ## Technical considerations (from `create-vite`)
 
 **Why use this over SvelteKit?**
