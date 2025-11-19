@@ -284,7 +284,7 @@
 
   <!-- Footer -->
   <footer class="mt-4 pt-4 text-gray-600 text-sm shrink-0">
-    <div class="flex items-center justify-between gap-4 flex-wrap">
+    <div class="flex items-center justify-between gap-4 flex-wrap max-w-6xl mx-auto">
       <a
         href="https://github.com/nathanclairmonte/mermaider"
         target="_blank"
