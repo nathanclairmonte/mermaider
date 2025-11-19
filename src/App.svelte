@@ -135,20 +135,12 @@
     }
   }
 
-  // Handle wheel zoom
+  // Handle wheel zoom (centered, not following cursor)
   function handleWheel(e: WheelEvent) {
     e.preventDefault();
-    const rect = previewDiv.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const prevScale = scale;
     const delta = Math.sign(e.deltaY);
     scale *= delta > 0 ? 0.9 : 1.1;
     scale = Math.max(0.2, Math.min(scale, 5));
-
-    // Adjust pan so zoom is centered on mouse
-    panX = mouseX - ((mouseX - panX) * (scale / prevScale));
-    panY = mouseY - ((mouseY - panY) * (scale / prevScale));
     applyTransform();
   }
 
@@ -272,8 +264,8 @@
           onmousedown={handleMouseDown}
           role="application"
           aria-label="Mermaid diagram preview with zoom and pan"
-          class="border rounded-lg bg-white dark:bg-gray-900 flex-1 w-full overflow-hidden flex items-center justify-center min-h-0 cursor-zoom-in"
-          class:cursor-grab={isDragging}
+          class="border rounded-lg bg-white dark:bg-gray-900 flex-1 w-full overflow-hidden flex items-center justify-center min-h-0 cursor-grab"
+          class:cursor-grabbing={isDragging}
         ></div>
       </div>
     </div>
