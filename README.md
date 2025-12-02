@@ -8,6 +8,7 @@ A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. 
 - [ ] Facilitate user-specified scale and/or filename for export
 - [ ] Touch support for mobile
 - [ ] Maybe make a custom logo for it lol, using shell emoji for favicon rn
+- [ ] Style errors (syntax errors etc.) more nicely
 - [ ] Dynamically import mermaid lib to improve load times
 
 ## Technical considerations (from `create-vite`)
