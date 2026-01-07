@@ -3,11 +3,14 @@
   import { onMount } from 'svelte';
   import { exportPNG } from './utils/exportPNG';
 
-  // State
-  let code = $state(`graph TD;
+  const STORAGE_KEY = 'mermaider-code';
+  const DEFAULT_CODE = `graph TD;
     A-->B;
     B-->C;
-    C-->A;`);
+    C-->A;`;
+
+  // State
+  let code = $state(localStorage.getItem(STORAGE_KEY) || DEFAULT_CODE);
   let errorMessage = $state('');
   let scale = $state(1);
   let panX = $state(0);
@@ -189,6 +192,9 @@
     if (mounted && previewDiv) {
       renderMermaid(code);
     }
+    if (mounted) {
+      localStorage.setItem(STORAGE_KEY, code);
+    }
   });
 
   // Setup global mouse listeners
@@ -216,8 +222,17 @@
     <div class="flex flex-row gap-4 w-full h-full min-h-0">
       <!-- Editor Section -->
       <div class="flex flex-col flex-1 h-full min-h-0">
-        <div class="flex flex-row items-center mb-2 shrink-0" style="height:48px;">
+        <div class="flex flex-row items-center justify-between mb-2 shrink-0" style="height:48px;">
           <label for="editor" class="font-semibold">Code Editor</label>
+          <button
+            onclick={() => {
+              code = "";
+              editorTextarea?.focus();
+            }}
+            class="text-sm text-gray-500 hover:text-blue-500 hover:underline px-2 py-1"
+          >
+            Clear
+          </button>
         </div>
 
         <div class="flex flex-row w-full flex-1 min-h-0">
