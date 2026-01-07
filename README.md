@@ -4,12 +4,14 @@ A Mermaid diagram renderer/viewer so I can stop fighting with mermaid.live lol. 
 
 ## TODO
 - [x] Wire up export PNG button properly
+- [x] Fix cropping on exported PNG
+- [x] Store code in localstorage so it's easier to resume editing the same diagram if desired
 - [ ] Syntax highlighting for mermaid code
 - [ ] Facilitate user-specified scale and/or filename for export
 - [ ] Touch support for mobile
 - [ ] Maybe make a custom logo for it lol, using shell emoji for favicon rn
 - [ ] Style errors (syntax errors etc.) more nicely
-- [ ] Dynamically import mermaid lib to improve load times
+- [ ] Dynamically import mermaid lib to improve load times (chat here: https://gemini.google.com/app/1265c9f6e1ebe488)
 
 ## Technical considerations (from `create-vite`)
 
