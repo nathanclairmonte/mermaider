@@ -14,16 +14,22 @@ export function exportPNG(
 
   // Scale factor for higher resolution export (2x for better quality without huge file sizes)
   const scale = 2;
+  const padding = 5;
 
-  // Get the viewBox dimensions
-  const viewBox = svgElement.viewBox.baseVal;
+  // Get the actual content dimensions
+  const bbox = svgElement.getBBox();
+  const x = bbox.x - padding;
+  const y = bbox.y - padding;
+  const width = bbox.width + padding * 2;
+  const height = bbox.height + padding * 2;
 
   // Clone the SVG to avoid modifying the original
   const svgClone = svgElement.cloneNode(true) as SVGSVGElement;
   svgClone.removeAttribute("width");
   svgClone.removeAttribute("height");
-  svgClone.setAttribute("width", viewBox.width.toString());
-  svgClone.setAttribute("height", viewBox.height.toString());
+  svgClone.setAttribute("viewBox", `${x} ${y} ${width} ${height}`);
+  svgClone.setAttribute("width", width.toString());
+  svgClone.setAttribute("height", height.toString());
 
   // Serialize the SVG to a string
   const svgData = new XMLSerializer().serializeToString(svgClone);
@@ -43,8 +49,8 @@ export function exportPNG(
 
   img.onload = () => {
     // Set canvas dimensions with scale factor for higher resolution
-    canvas.width = viewBox.width * scale;
-    canvas.height = viewBox.height * scale;
+    canvas.width = width * scale;
+    canvas.height = height * scale;
 
     // Scale the drawing context
     ctx.scale(scale, scale);
